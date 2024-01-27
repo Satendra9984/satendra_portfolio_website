@@ -10,6 +10,12 @@ A responsive Flutter-based template for a developer's portfolio website. This te
 - **WebAssembly Integration (Future):** Future-proof with plans for WebAssembly integration, enhancing web performance.
 - **NoCode Format (Future):** Plan to integrate a NoCode format for effortless content additions without coding.
 
+## Demo Video
+
+
+https://github.com/Satendra9984/satendra_portfolio_website/assets/81842437/03cf7f19-5214-4568-9922-b345fb5a3b66
+
+
 
 License 📄
 This project is licensed under the MIT License.
