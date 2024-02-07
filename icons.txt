@@ -1,0 +1,40 @@
+
+Another milestone achived now you can select icons from widely available icons from google and extensive list of 
+open source libraries like fontawesome and lineawesome icons with thousands of available icons for almost every use case;
+
+🌟 Ready to dive in? Join the waiting list for early access and be among the first to explore this cutting-edge product! Head over to Digia.tech, select your project, navigate to Themes, dive into Typography, and discover the FontToken magic.
+
+
+This feature was created with the help of reverse engineering of flutter open source library @https://pub.dev/packages/flutter_iconpicker 
+reducing code of about 70% and managing state through Cubit which makes it blazingly fast
+It was very very fun and challenging to reverse engineer open source library and write a clean code;
+
+It is now meet our requirements and is a generice library for use in other places in the application DRY principle
+exposing its API for use.
+
+Happy Coding;
+
+🚀 Achievement Unlocked! 🚀
+
+Thrilled to announce a new milestone achieved in our latest project! 🌟 Now, you have the power to seamlessly select icons from an extensive collection, sourced from popular libraries like Google MaterialIcons, FontAwesomeIcons, and LineAwesome. With thousands of icons available for virtually every use case, the possibilities are endless.
+
+🎉 Ready to take the plunge? Join the waiting list for early access and be among the pioneers to experience the cutting-edge capabilities of our latest product! Head over to @digia.tech. 
+
+🔍 This incredible feature was crafted with precision and innovation, leveraging the art of reverse engineering from the Flutter open-source library (@https://lnkd.in/eMZxkW-e).
+💡 We managed to slash the codebase by a whopping 70%, enhancing performance and efficiency.
+🚀 The state is seamlessly managed through Cubit, making it blazingly fast.
+
+The process of reverse engineering an open-source library was both immensely fun and challenging. We take pride in delivering clean, robust code that meets our requirements. 
+
+What's more, this feature has now evolved into a generic library, adhering to the DRY (Don't Repeat Yourself) principle and exposing its API for versatile use throughout the application.
+
+Follow Digia for latest product news
+
+Happy Coding! 💻✨ 
+#Innovation #CuttingEdgeTech #Flutter #DigiaTech #HappyCoding
+
+
+
+
+
+

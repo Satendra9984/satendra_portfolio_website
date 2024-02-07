@@ -35,6 +35,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  google_fonts: ^6.1.0
+  line_icons: ^2.0.3
+  font_awesome_flutter: ^10.7.0
+  url_launcher: ^6.2.4
+  flutter_markdown: ^0.6.18+3
+  http: ^1.2.0
+  flutter_html: ^3.0.0-beta.2
+#  flutter_math_fork: ^0.7.2
+
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +71,8 @@ flutter:
   assets:
     - assets/images/Saly-12.png
     - assets/images/Saly-16.png
+    - assets/images/Avatar.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -75,10 +86,37 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: FuturaNow
+       fonts:
+         - asset: assets\fonts\futura_now\FuturaNowHeadline.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineBlack.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineBlackItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineBold.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineBoldItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineExtraBlack.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineExtraBlackItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineExtraBold.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineExtraBoldItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineExtraLight.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineExtraLightItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineLight.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineLightItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineMedium.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineMediumItalic.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineThin.ttf
+         - asset: assets\fonts\futura_now\FuturaNowHeadlineThinItalic.ttf
+
+
+
+
+
+
+
+         
+
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

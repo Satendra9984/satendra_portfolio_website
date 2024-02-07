@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColours {
   static const Color bigStone = Color(0XFF17333E);
   static const Color elephant = Color(0XFF0F3640);
@@ -39,17 +41,15 @@ class AppColours {
   static const Color slateGray = Color(0XFF6A838C);
 
   static const Color appBarblack = Color(0XFF222222);
-  static const Color backgroundBlack= Color(0XFF161513);
+  static const Color backgroundBlack = Color(0XFF161513);
   static const Color bottomBarBlack = Color(0XFF191919);
-  
+
   static const Color orange = Color(0XFFFF8660);
   static const Color orangeGradientSecondary = Color(0XFFD5491D);
   static const Color purple = Color(0XFF8000FF);
 
-
-  static const Color blueGradientLight= Color(0XFF5BADFF);
-  static const Color blueGradientDark= Color(0XFF1373D1);
-
+  static const Color blueGradientLight = Color(0XFF5BADFF);
+  static const Color blueGradientDark = Color(0XFF1373D1);
 
   // static const Color = Color(0XFF);
 
@@ -57,6 +57,5 @@ class AppColours {
   static const Color secondartText = Color(0XFFC5C5C5);
   static const Color lightGrey = Color(0XFF8491A0);
 
-  
-
+  // static const Color grey300 = Colors.grey.shade300;
 }

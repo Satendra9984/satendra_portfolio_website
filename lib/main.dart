@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:personal_portfolio_website/screens/home_screen.dart';
 import 'package:personal_portfolio_website/utils/colors.dart';
+import 'package:personal_portfolio_website/views/home/home_screen_dektop.dart';
 
-void main() {
+void main() async {
+
   runApp(const MyApp());
 }
 
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColours.elephant),
         useMaterial3: true,
+        fontFamily: 'FuturaNow',
       ),
-      home: PortfolioHomePage(),
+      home: DesktopHomeScreen(),
     );
   }
 }
