@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio_website/views/about_me/about_me_desktop.dart';
+import 'package:personal_portfolio_website/views/experience/experience_desktop_screen.dart';
 import 'package:personal_portfolio_website/views/home_screen.dart';
 import 'package:personal_portfolio_website/views/projects/project_desktop_screen.dart';
 
@@ -45,13 +46,13 @@ class _MyProjectsDesktopScreenState extends State<DesktopHomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.logo_dev_rounded,
-                    color: Colors.grey.shade900,
+                    color: Colors.transparent,
                     size: 120,
                   ),
                   getDrawer(),
-                  Text(''),
+                  const Text(''),
                 ],
               ),
             ),
@@ -60,10 +61,11 @@ class _MyProjectsDesktopScreenState extends State<DesktopHomeScreen> {
               flex: 12,
               child: PageView(
                 controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  AboutMeDesktopScreen(),
                   PortfolioHomePage(),
-                  MyProjectsDesktopScreen(),
+                  AboutMeDesktopScreen(),
+                  MyExperienceDesktopScreen(),
                   MyProjectsDesktopScreen(),
                 ],
               ),

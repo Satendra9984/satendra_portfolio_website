@@ -87,24 +87,24 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
             child: Container(
               margin: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 2),
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade500,
-                    offset: const Offset(1, 1),
-                    blurRadius: 2,
-                    spreadRadius: 1,
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: const Offset(-1, -1),
-                    blurRadius: 1,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
+              // decoration: BoxDecoration(
+              //   color: Colors.grey.shade300,
+              //   borderRadius: BorderRadius.circular(8),
+              //   boxShadow: [
+              //     BoxShadow(
+              //       color: Colors.grey.shade500,
+              //       offset: const Offset(1, 1),
+              //       blurRadius: 2,
+              //       spreadRadius: 1,
+              //     ),
+              //     BoxShadow(
+              //       color: Colors.white,
+              //       offset: const Offset(-1, -1),
+              //       blurRadius: 1,
+              //       spreadRadius: 1,
+              //     ),
+              //   ],
+              // ),
               child: FutureBuilder<String?>(
                 future: _loadMarkdown(currentProject),
                 builder: (context, snap) {
@@ -143,8 +143,8 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
   }
 
   Widget projectTile(ProjectDataModel model, int index) {
-    double offset = 2.0;
-    double blurradius = 2.0;
+    double offset = 1;
+    double blurradius = 1.0;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -152,13 +152,14 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         alignment: Alignment.centerLeft,
         decoration: WidgetUtils.getBoxDecoration(
           offset: offset,
           blurRadius: blurradius,
           spreadRadius: 1,
+          backgroundColor: Colors.grey.shade300,
           isDark: index == currentProject,
         ),
         child: Column(
@@ -190,4 +191,6 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
       ),
     );
   }
+
+
 }
