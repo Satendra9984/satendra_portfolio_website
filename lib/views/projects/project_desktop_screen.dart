@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:personal_portfolio_website/core/network/http_utils.dart';
 import 'package:personal_portfolio_website/models/project_data_model.dart';
+import 'package:personal_portfolio_website/utils/widget_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyProjectsDesktopScreen extends StatefulWidget {
@@ -49,7 +50,6 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
     //   projectUrl:
     //       '',
     // ),
-    
   ];
 
   Future<String?> _loadMarkdown(int index) async {
@@ -155,27 +155,11 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: index == currentProject
-              ? Colors.grey.shade900
-              : Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color:
-                  index == currentProject ? Colors.black : Colors.grey.shade500,
-              offset: Offset(offset, offset),
-              blurRadius: blurradius,
-              spreadRadius: 1,
-            ),
-            BoxShadow(
-              color:
-                  index == currentProject ? Colors.grey.shade100 : Colors.white,
-              offset: Offset(-offset, -offset),
-              blurRadius: blurradius,
-              spreadRadius: 1,
-            ),
-          ],
+        decoration: WidgetUtils.getBoxDecoration(
+          offset: offset,
+          blurRadius: blurradius,
+          spreadRadius: 1,
+          isDark: index == currentProject,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
