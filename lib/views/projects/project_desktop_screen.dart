@@ -64,80 +64,67 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: Row(
-        children: [
-          // List
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 28.0),
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                itemCount: _projects.length,
-                itemBuilder: (ctx, index) {
-                  return projectTile(_projects[index], index);
-                },
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+        
+        child: Row(
+          children: [
+            // List
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  itemCount: _projects.length,
+                  itemBuilder: (ctx, index) {
+                    return projectTile(_projects[index], index);
+                  },
+                ),
               ),
             ),
-          ),
-          // Detail
-          Expanded(
-            flex: 3,
-            child: Container(
-              margin: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 2),
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.grey.shade300,
-              //   borderRadius: BorderRadius.circular(8),
-              //   boxShadow: [
-              //     BoxShadow(
-              //       color: Colors.grey.shade500,
-              //       offset: const Offset(1, 1),
-              //       blurRadius: 2,
-              //       spreadRadius: 1,
-              //     ),
-              //     BoxShadow(
-              //       color: Colors.white,
-              //       offset: const Offset(-1, -1),
-              //       blurRadius: 1,
-              //       spreadRadius: 1,
-              //     ),
-              //   ],
-              // ),
-              child: FutureBuilder<String?>(
-                future: _loadMarkdown(currentProject),
-                builder: (context, snap) {
-                  if (snap.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
+            // Detail
+            Expanded(
+              flex: 5,
+              child: Container(
+                margin:
+                    const EdgeInsets.only(top: 8, left: 24, right: 24, bottom: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: FutureBuilder<String?>(
+                  future: _loadMarkdown(currentProject),
+                  builder: (context, snap) {
+                    if (snap.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
+                      );
+                    } else if (snap.hasError ||
+                        snap.hasData == false ||
+                        snap.data == null) {
+                      return const Center(
+                        child: Icon(
+                          Icons.error_outline_rounded,
+                          color: Colors.redAccent,
+                        ),
+                      );
+                    }
+                    return Markdown(
+                      data: snap.data!,
+                      // onTapLink: (text, href, title) {
+                      //   if (href != null) {
+                      //     print(href);
+                      //     // launchUrl(Uri(path: href));
+                      //   }
+                      // },
                     );
-                  } else if (snap.hasError ||
-                      snap.hasData == false ||
-                      snap.data == null) {
-                    return const Center(
-                      child: Icon(
-                        Icons.error_outline_rounded,
-                        color: Colors.redAccent,
-                      ),
-                    );
-                  }
-                  return Markdown(
-                    data: snap.data!,
-                    // onTapLink: (text, href, title) {
-                    //   if (href != null) {
-                    //     print(href);
-                    //     // launchUrl(Uri(path: href));
-                    //   }
-                    // },
-                  );
-                },
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -162,28 +149,47 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
           backgroundColor: Colors.grey.shade300,
           isDark: index == currentProject,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            Text(
-              model.title,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: index == currentProject
-                    ? Colors.grey.shade100
-                    : Colors.black,
-                fontSize: 14.0,
+            Container(
+              height: 52,
+              width: 52,
+              margin:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+              alignment: Alignment.centerLeft,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/projects_logo_cropped.png'),
+                ),
               ),
             ),
-            // const SizedBox(height: 5.0),
-            Text(
-              model.descriptions,
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: index == currentProject
-                    ? Colors.grey.shade300
-                    : Colors.black,
-                fontSize: 12.0,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    model.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: index == currentProject
+                          ? Colors.grey.shade100
+                          : Colors.black,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  // const SizedBox(height: 5.0),
+                  Text(
+                    model.descriptions,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: index == currentProject
+                          ? Colors.grey.shade300
+                          : Colors.black,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -191,6 +197,4 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
       ),
     );
   }
-
-
 }

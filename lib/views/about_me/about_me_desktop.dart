@@ -44,54 +44,77 @@ class AboutMeDesktopScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-        alignment: Alignment.centerLeft,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
+        height: MediaQuery.of(context).size.height,
+        // alignment: Alignment.bottomRight,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            alignment: Alignment.bottomRight,
+            opacity: 0.70,
+            image: AssetImage('assets/images/person_under_tree_cropped_side.png'),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Welcome To My World',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade600,
-                  fontSize: 14.0,
+        ),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome To My World',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade600,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      const Text(
+                        'About Me',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black,
+                          fontSize: 32.0,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '''Hey there! I'm Satendra Pal, a Junior Software Developer with a knack for crafting digital solutions. I love facing technical challenges that no one is solving.
+                        ''',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade600,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      //
+                      Wrap(
+                        runAlignment: WrapAlignment.spaceBetween,
+                        alignment: WrapAlignment.spaceBetween,
+                        children: [
+                          skillsSection(),
+                          databaseSection(),
+                          frameworkSection(),
+                          toolsSection(),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              const Text(
-                'About Me',
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.black,
-                  fontSize: 32.0,
+                const Expanded(
+                  flex: 1,
+                  child: Text(''),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                '''Hey there! I'm Satendra Pal, a Junior Software Developer with a knack for crafting digital solutions. I love facing technical challenges that no one is solving.
-                ''',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade600,
-                  fontSize: 14.0,
-                ),
-              ),
-              //
-              Wrap(
-                runAlignment: WrapAlignment.spaceBetween,
-                alignment: WrapAlignment.spaceBetween,
-                children: [
-                  skillsSection(),
-                  databaseSection(),
-                  frameworkSection(),
-                  toolsSection(),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

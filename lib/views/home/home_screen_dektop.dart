@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio_website/views/about_me/about_me_desktop.dart';
 import 'package:personal_portfolio_website/views/experience/experience_desktop_screen.dart';
 import 'package:personal_portfolio_website/views/home_screen.dart';
@@ -36,37 +37,45 @@ class _MyProjectsDesktopScreenState extends State<DesktopHomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: const EdgeInsets.all(0.0),
+        child: Column(
           children: [
-            // Drawer
-            Expanded(
-              flex: 1,
-              child: Column(
+            Container(
+              margin: const EdgeInsets.only(left: 42.0, right: 16.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
-                    Icons.logo_dev_rounded,
-                    color: Colors.transparent,
-                    size: 120,
+                  Text(
+                    'theWatcher',
+                    style: GoogleFonts.play(    // play, playfair, pacifico, incosonata
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 24.0,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                   getDrawer(),
-                  const Text(''),
                 ],
               ),
             ),
-            // List
             Expanded(
-              flex: 12,
-              child: PageView(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  PortfolioHomePage(),
-                  AboutMeDesktopScreen(),
-                  MyExperienceDesktopScreen(),
-                  MyProjectsDesktopScreen(),
+                  // List
+                  Expanded(
+                    flex: 12,
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        MyExperienceDesktopScreen(),
+                        PortfolioHomePage(),
+                        AboutMeDesktopScreen(),
+                        MyProjectsDesktopScreen(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -76,8 +85,8 @@ class _MyProjectsDesktopScreenState extends State<DesktopHomeScreen> {
     );
   }
 
-  Column getDrawer() {
-    return Column(
+  Row getDrawer() {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

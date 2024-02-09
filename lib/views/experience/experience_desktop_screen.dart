@@ -79,13 +79,16 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 44),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 44,vertical: 32.0),
+        
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'Work Experiences',
@@ -98,22 +101,34 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
                   const SizedBox(height: 8),
                   // List of projects
 
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: _experiences.length,
-                    itemBuilder: (context, index) {
-                      return experienceTile(
-                        _experiences[index],
-                        index,
-                      );
-                    },
+                  Expanded(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: _experiences.length,
+                      itemBuilder: (context, index) {
+                        return experienceTile(
+                          _experiences[index],
+                          index,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
             Expanded(
-              child: Text(''),
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24),
+                decoration:  const BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    alignment: Alignment.bottomRight,
+                    opacity: 0.70,
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/2151038314.jpg'),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
