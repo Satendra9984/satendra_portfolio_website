@@ -36,6 +36,10 @@ class _MyProjectsDesktopScreenState extends State<DesktopHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+        
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(0.0),
         child: Column(

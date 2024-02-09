@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio_website/models/experience_data_model.dart';
 import 'package:personal_portfolio_website/utils/widget_utils.dart';
@@ -11,7 +13,7 @@ class MyExperienceDesktopScreen extends StatefulWidget {
 }
 
 class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
-  int currentExperienceSelected = -1;
+  int currentExperienceSelected = 0;
 
   final List<ExperienceDataModel> _experiences = [
     ExperienceDataModel(
@@ -67,7 +69,9 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
 
 📝Nailed down every nuance of customer needs, meticulously documenting requirements to construct a robust system with minimal errors.
 
-🚀 Crafted a complete mobile app from scratch, diving headfirst into the framework while on the learning curve! 🎉 Fun-filled and incredibly enriching journey packed with hands-on experiences and valuable lessons. 
+🚀 Crafted a complete mobile app from scratch, diving headfirst into the framework while on the learning curve! 
+
+🎉 Fun-filled and incredibly enriching journey packed with hands-on experiences and valuable lessons. 
 
 📝Nailed down every nuance of customer needs, meticulously documenting requirements to construct a robust system with minimal errors.
 
@@ -80,8 +84,15 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 44,vertical: 32.0),
-        
+        padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 32.0),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            alignment: Alignment.bottomCenter,
+            opacity: 1.0,
+            fit: BoxFit.cover,
+            image: AssetImage('assets/images/Experience_1.jpg'),
+          ),
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -118,18 +129,15 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24),
-                decoration:  const BoxDecoration(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24),
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  image: DecorationImage(
-                    alignment: Alignment.bottomRight,
-                    opacity: 0.70,
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/2151038314.jpg'),
-                  ),
                 ),
               ),
             ),
+          
+          
           ],
         ),
       ),
@@ -137,8 +145,8 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
   }
 
   Widget experienceTile(ExperienceDataModel model, int index) {
-    double offset = 1;
-    double blurradius = 1.0;
+    // double offset = 1;
+    // double blurRadius = 1.0;
     return GestureDetector(
       onTap: () {
         if (currentExperienceSelected == index) {
@@ -152,65 +160,82 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
         }
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-        alignment: Alignment.centerLeft,
-        decoration: WidgetUtils.getBoxDecoration(
-          offset: offset,
-          blurRadius: blurradius,
-          spreadRadius: 1,
-          backgroundColor: Colors.grey.shade300,
-          isDark: true,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    model.role,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade100,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
-                Text(
-                  '${model.startDate}-${model.endDate}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey.shade100,
-                    fontSize: 12.0,
-                  ),
-                ),
-              ],
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        color: Colors.transparent,
+        child: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 25,
+              sigmaY: 25,
             ),
-            const SizedBox(height: 8.0),
-            Text(
-              '@ ${model.company}',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: Colors.grey.shade100,
-                fontSize: 14.0,
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                borderRadius: BorderRadius.circular(8.0),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.white.withOpacity(0.2),
+                    Colors.white.withOpacity(0.1),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                
               ),
-            ),
-            if (currentExperienceSelected == index)
-              Column(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 12.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          model.role,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            // color: Colors.grey.shade100,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '${model.startDate}-${model.endDate}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          // color: Colors.grey.shade100,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
                   Text(
-                    model.experience,
+                    '@ ${model.company}',
                     style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey.shade100,
-                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600,
+                      // color: Colors.grey.shade100,
+                      fontSize: 14.0,
                     ),
                   ),
+                  if (currentExperienceSelected == index)
+                    Column(
+                      children: [
+                        const SizedBox(height: 12.0),
+                        Text(
+                          model.experience,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            // color: Colors.grey.shade100,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ],
+                    ),
                 ],
               ),
-          ],
+            ),
+          ),
         ),
       ),
     );

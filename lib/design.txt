@@ -10,3 +10,6 @@ Pages:
 3) Experience
 3) Projects Page:
 5) contact me
+
+
+https://pub.dev/packages/flutter_svg
