@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:personal_portfolio_website/utils/widget_utils.dart';
 
 class StatusBarWidget extends StatelessWidget {
-  final String title;
-  final double years;
-  final double maxYears;
+  final StatusBarData statusBarData;
   final Color barColor;
+
+  final double maxYears;
   final double maxWidth;
   final double maxHeight;
 
   const StatusBarWidget({
-    required this.title,
-    required this.years,
-    required this.maxYears,
+    required this.statusBarData,
     required this.barColor,
+    double? maxYears,
     double? width,
     height,
     super.key,
   })  : maxWidth = width ?? 240,
-        maxHeight = height ?? 22.0;
+        maxHeight = height ?? 22.0,
+        maxYears = maxYears ?? 3;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class StatusBarWidget extends StatelessWidget {
     double blurRadius = 1;
     double spreadRadius = 1;
 
-    double barWidth = (maxWidth / maxYears) * years - 8.8;
+    double barWidth = (maxWidth / maxYears) * statusBarData.years - 8.8;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +34,7 @@ class StatusBarWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
           child: Text(
-            '$title, $years years',
+            '${statusBarData.title}, ${statusBarData.years} years',
             style: TextStyle(
               fontWeight: FontWeight.w800,
               color: Colors.grey.shade700,
@@ -52,6 +52,7 @@ class StatusBarWidget extends StatelessWidget {
             blurRadius: blurRadius + 1,
             spreadRadius: spreadRadius + 1,
             borderRadius: 50.0,
+            backgroundColor: Colors.grey.shade300,
             inset: true,
           ),
           child: Row(
@@ -73,4 +74,14 @@ class StatusBarWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+class StatusBarData {
+  final String title;
+  final double years;
+
+  StatusBarData({
+    required this.title,
+    required this.years,
+  });
 }

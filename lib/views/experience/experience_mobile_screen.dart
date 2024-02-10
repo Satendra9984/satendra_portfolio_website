@@ -7,15 +7,15 @@ import 'package:personal_portfolio_website/models/experience_data_model.dart';
 import 'package:personal_portfolio_website/utils/widget_utils.dart';
 import 'package:personal_portfolio_website/views/app_bar_cubit/app_bar_cubit.dart';
 
-class MyExperienceDesktopScreen extends StatefulWidget {
-  const MyExperienceDesktopScreen({super.key});
+class MyExperienceMobileScreen extends StatefulWidget {
+  const MyExperienceMobileScreen({super.key});
 
   @override
-  State<MyExperienceDesktopScreen> createState() =>
+  State<MyExperienceMobileScreen> createState() =>
       _MyExperienceDesktopScreenState();
 }
 
-class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
+class _MyExperienceDesktopScreenState extends State<MyExperienceMobileScreen> {
   int currentExperienceSelected = 0;
 
   final List<ExperienceDataModel> _experiences = [
@@ -81,177 +81,78 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
 💻 Skills: Flutter · Google Cloud Platform (GCP) · Node.js · Dart · Dynamic Programming · Creative Problem Solving · API Development · Flask''',
     ),
   ];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade300,
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            alignment: Alignment.bottomCenter,
-            opacity: 1.0,
-            fit: BoxFit.cover,
-            image: AssetImage('assets/images/Experience_1.jpg'),
-          ),
-        ),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 42.0, right: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'theWatcher',
-                    style: GoogleFonts.play(
-                      // play, playfair, pacifico, incosonata
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 24.0,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  getDrawer(context),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 44, vertical: 32.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Work Experiences',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Colors.black,
-                              fontSize: 32.0,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          // List of projects
-
-                          Expanded(
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: _experiences.length,
-                              itemBuilder: (context, index) {
-                                return experienceTile(
-                                  _experiences[index],
-                                  index,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 32.0, horizontal: 24),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          alignment: Alignment.bottomCenter,
+          opacity: 1.0,
+          fit: BoxFit.cover,
+          image: AssetImage('assets/images/Experience_1.jpg'),
         ),
       ),
-    );
-  }
-
-  Widget getDrawer(BuildContext context) {
-    return BlocBuilder<AppBarCubit, AppBarState>(
-      builder: (context, state) {
-        var appbarcubit = context.read<AppBarCubit>();
-        List<AppBarData> list = appbarcubit.appBarList;
-
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List.generate(
-            list.length,
-            (index) => navigationElement(
-              iconData: list[index].iconData,
-              title: list[index].title,
-              index: index,
-              isCurrent: state.currentSelectedAppBar == index,
+      child: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'theWatcher',
+            style: GoogleFonts.play(
+              // play, playfair, pacifico, incosonata
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              fontSize: 24.0,
+              fontStyle: FontStyle.italic,
             ),
           ),
-        );
-      },
-    );
-  }
-
-  Widget navigationElement({
-    required IconData iconData,
-    required String title,
-    required int index,
-    required bool isCurrent,
-  }) {
-    // double offset = 1.0;
-    // double blurradius = 1.0;
-    return GestureDetector(
-      onTap: () {
-        context.read<AppBarCubit>().setNewAppBar(index);
-      },
-      child: Container(
-        color: Colors.transparent,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 25,
-              sigmaY: 25,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState?.openEndDrawer();
+                },
+                icon: const Icon(Icons.menu))
+          ],
+        ),
+        endDrawer: getSingleDrawer(context),
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              alignment: Alignment.bottomCenter,
+              opacity: 1.0,
+              fit: BoxFit.cover,
+              image: AssetImage('assets/images/Experience_1.jpg'),
             ),
-            child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              margin:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
-                borderRadius: BorderRadius.circular(8.0),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.white.withOpacity(0.3),
-                    Colors.white.withOpacity(0.1),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Work Experiences',
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.black,
+                  fontSize: 24.0,
                 ),
               ),
-              child: Column(
-                children: [
-                  Icon(
-                    iconData,
-                    color: isCurrent ? Colors.white : Colors.black,
-                    size: 16.0,
-                  ),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: isCurrent ? Colors.white : Colors.black,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 8),
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: _experiences.length,
+                  itemBuilder: (context, index) {
+                    return experienceTile(
+                      _experiences[index],
+                      index,
+                    );
+                  },
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
@@ -353,4 +254,70 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
       ),
     );
   }
+
+  Widget getSingleDrawer(BuildContext context) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        width: 170.0,
+        height: 180,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16.0),
+            bottomLeft: Radius.circular(16.0),
+          ),
+        ),
+        child: BlocBuilder<AppBarCubit, AppBarState>(
+          builder: (context, state) {
+            var appbarcubit = context.read<AppBarCubit>();
+            List<AppBarData> list = appbarcubit.appBarList;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                list.length,
+                (index) {
+                  bool selected = index == state.currentSelectedAppBar;
+                  return Container(
+                    color:
+                        selected ? Colors.grey.shade900 : Colors.grey.shade300,
+                    child: ListTile(
+                      selected: selected,
+                      onTap: () {
+                        appbarcubit.setNewAppBar(index);
+                      },
+                      dense: true,
+                      selectedTileColor: Colors.grey.shade900,
+                      leading: Icon(
+                        list[index].iconData,
+                        color: selected
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade900,
+                        size: 18.0,
+                      ),
+                      title: Text(
+                        list[index].title,
+                        style: GoogleFonts.play(
+                          // play, playfair, pacifico, incosonata
+                          fontWeight: FontWeight.w600,
+                          color: selected
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade900,
+                          fontSize: 16.0,
+                          // fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+
 }
