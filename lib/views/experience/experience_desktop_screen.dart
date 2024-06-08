@@ -2,12 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio_website/core/dummy_experience_data.dart';
 import 'package:personal_portfolio_website/core/network/http_utils.dart';
 import 'package:personal_portfolio_website/models/experience_data_model.dart';
 import 'package:personal_portfolio_website/utils/widget_utils.dart';
 import 'package:personal_portfolio_website/views/app_bar_cubit/app_bar_cubit.dart';
+import 'package:personal_portfolio_website/views/widgets/experience_tile.dart';
 import 'package:rive/rive.dart' hide LinearGradient;
 
 class MyExperienceDesktopScreen extends StatefulWidget {
@@ -37,17 +39,27 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Stack(
+        alignment: AlignmentDirectional.center,
         children: [
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: const RiveAnimation.asset(
-              'assets/animations/pull_to_refresh.riv',
+          SizedBox(
+            width: size.width,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 10),
+              blendMode: BlendMode.srcOver,
+              child: const RiveAnimation.asset(
+                'assets/animations/pull_to_refresh_.riv',
+                fit: BoxFit.cover,
+                behavior: RiveHitTestBehavior.transparent,
+              ),
             ),
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 42.0, right: 16.0),
@@ -59,7 +71,7 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
                       style: GoogleFonts.play(
                         // play, playfair, pacifico, incosonata
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 24.0,
                         fontStyle: FontStyle.italic,
                       ),
@@ -70,48 +82,38 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
               ),
               Expanded(
                 child: Container(
+                  alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 44, vertical: 32.0),
-                  child: Row(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Work Experiences',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                color: Colors.black,
-                                fontSize: 32.0,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            // List of projects
-
-                            Expanded(
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: _experiences.length,
-                                itemBuilder: (context, index) {
-                                  return experienceTile(
-                                    _experiences[index],
-                                    index,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                      const Text(
+                        'Work Experiences',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                          fontSize: 32.0,
                         ),
                       ),
+                      const SizedBox(height: 8),
+                      // List of projects
                       Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 32.0, horizontal: 24),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
+                        child: SizedBox(
+                          width: size.width > 760 ? 760 : size.width,
+                          child: AlignedGridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: 1,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: _experiences.length,
+                            mainAxisSpacing: 16.0,
+                            crossAxisSpacing: 16.0,
+                            itemBuilder: (context, index) {
+                              return ExperienceTile(
+                                model: _experiences[index],
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -155,8 +157,6 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
     required int index,
     required bool isCurrent,
   }) {
-    // double offset = 1.0;
-    // double blurradius = 1.0;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: GestureDetector(
@@ -189,14 +189,14 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
                 children: [
                   Icon(
                     iconData,
-                    color: isCurrent ? Colors.white : Colors.black,
+                    color: isCurrent ? Colors.white : Colors.white,
                     size: 16.0,
                   ),
                   Text(
                     title,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: isCurrent ? Colors.white : Colors.black,
+                      color: isCurrent ? Colors.white : Colors.white,
                       fontSize: 14.0,
                     ),
                   ),
@@ -209,99 +209,5 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
     );
   }
 
-  Widget experienceTile(ExperienceDataModel model, int index) {
-    // double offset = 1;
-    // double blurRadius = 1.0;
-    return GestureDetector(
-      onTap: () {
-        if (currentExperienceSelected == -1) {
-          setState(() {
-            currentExperienceSelected = index;
-          });
-        } else {
-          setState(() {
-            currentExperienceSelected = -1;
-          });
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8.0),
-        color: Colors.transparent,
-        child: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 25,
-              sigmaY: 25,
-            ),
-            child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
-                borderRadius: BorderRadius.circular(8.0),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.white.withOpacity(0.2),
-                    Colors.white.withOpacity(0.1),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          model.role,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            // color: Colors.grey.shade100,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '${model.startDate}-${model.endDate}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          // color: Colors.grey.shade100,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    '@ ${model.company}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      // color: Colors.grey.shade100,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  if (currentExperienceSelected == index)
-                    Column(
-                      children: [
-                        const SizedBox(height: 12.0),
-                        Text(
-                          model.experience,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            // color: Colors.grey.shade100,
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
+

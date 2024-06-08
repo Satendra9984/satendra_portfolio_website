@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio_website/core/dummy_experience_data.dart';
-import 'package:personal_portfolio_website/core/network/http_utils.dart';
 import 'package:personal_portfolio_website/models/experience_data_model.dart';
-import 'package:personal_portfolio_website/utils/widget_utils.dart';
 import 'package:personal_portfolio_website/views/app_bar_cubit/app_bar_cubit.dart';
+import 'package:personal_portfolio_website/views/widgets/experience_tile.dart';
+import 'package:rive/rive.dart' hide LinearGradient;
 
 class MyExperienceMobileScreen extends StatefulWidget {
   const MyExperienceMobileScreen({super.key});
@@ -30,47 +30,59 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceMobileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          alignment: Alignment.bottomCenter,
-          opacity: 0.6,
-          fit: BoxFit.cover,
-          image: AssetImage('assets/images/Experience_1.jpg'),
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            const Text(
-              'Work Experiences',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-                fontSize: 24.0,
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          SizedBox(
+            width: size.width,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 10),
+              blendMode: BlendMode.srcOver,
+              child: const RiveAnimation.asset(
+                'assets/animations/pull_to_refresh_.riv',
+                fit: BoxFit.cover,
+                behavior: RiveHitTestBehavior.transparent,
               ),
             ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 16.0),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: _experiences.length,
-                  itemBuilder: (context, index) {
-                    return experienceTile(
-                      _experiences[index],
-                      index,
-                    );
-                  },
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 32.0),
+              const Text(
+                'Work Experiences',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  fontSize: 24.0,
                 ),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(height: 8),
+              Expanded(
+                child: SizedBox(
+                  width: size.width > 600 ? 600 : size.width,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: _experiences.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                        child: ExperienceTile(
+                         model: _experiences[index],
+                          
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -244,8 +244,9 @@ class PortfolioHomePage extends StatelessWidget {
                             //   fit: BoxFit.fitHeight,
                             // ),
 
-                            child: RiveAnimation.asset(
-                              'assets/animations/college_student.riv',
+                            child: const RiveAnimation.asset(
+                              // 'assets/animations/college_student.riv',
+                             ' assets/animations/pull_to_refresh.riv',
                             ),
                           ),
                         ),
