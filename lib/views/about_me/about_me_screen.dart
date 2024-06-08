@@ -241,7 +241,7 @@ class PortfolioHomePage extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -252,7 +252,7 @@ class PortfolioHomePage extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -262,12 +262,12 @@ class PortfolioHomePage extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(height: 4),
-                                SizedBox(height: multiplier * 56),
+                                SizedBox(height: multiplier * 16),
                             
                                 // <------------------- About --------------------------- >
                               ],

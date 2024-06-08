@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio_website/utils/colors.dart';
 import 'package:personal_portfolio_website/views/get_in_touch/contacts_sheet.dart';
 import 'package:personal_portfolio_website/views/widgets/neumorphic_buttons.dart';
+import 'package:rive/rive.dart' hide LinearGradient;
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -80,26 +81,27 @@ class PortfolioHomePageMobile extends StatelessWidget {
                     children: [
                       // <------------------  Intro Part ---------------------->
 
-                      CircleAvatar(
-                        radius: 124,
-                        backgroundColor: Colors.transparent,
-                        child: SvgPicture.asset(
-                          'assets/images/personality_1.svg',
-                          semanticsLabel: 'Personality',
-                          fit: BoxFit.fill,
+                      const SizedBox(
+                        height: 200.0,
+                        child: RiveAnimation.asset(
+                          //  'assets/animations/pull_to_refresh_.riv',
+                          'assets/animations/bubble_demo.riv',
+                          //  'assets/animations/college_student.riv',
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: multiplier * 40),
+                      // SizedBox(height: multiplier * 20),
 
                       Wrap(
                         alignment: WrapAlignment.center,
+                        runAlignment: WrapAlignment.center,
                         children: [
                           Text(
-                            ' I am',
+                            'I am',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: multiplier * 52,
-                              fontWeight: FontWeight.w700,
+                              fontSize: multiplier * 38,
+                              fontWeight: FontWeight.w900,
                             ),
                           ),
                           ShaderMask(
@@ -110,17 +112,17 @@ class PortfolioHomePageMobile extends StatelessWidget {
                               ' Satendra Pal',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: multiplier * 48,
-                                fontWeight: FontWeight.w700,
+                                fontSize: multiplier * 42,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
                           Text(
-                            ' an',
+                            ' a ',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: multiplier * 52,
-                              fontWeight: FontWeight.w700,
+                              fontSize: multiplier * 38,
+                              fontWeight: FontWeight.w900,
                             ),
                           ),
                           ShaderMask(
@@ -128,20 +130,20 @@ class PortfolioHomePageMobile extends StatelessWidget {
                               return gradient.createShader(rect);
                             },
                             child: Text(
-                              ' Engineer',
+                              'Cross-Platform Engineer',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: multiplier * 48,
-                                fontWeight: FontWeight.w700,
+                                fontSize: multiplier * 42,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
                           Text(
-                            ' and I Build',
+                            ' , ',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: multiplier * 52,
-                              fontWeight: FontWeight.w700,
+                              fontSize: multiplier * 38,
+                              fontWeight: FontWeight.w900,
                             ),
                           ),
                           ShaderMask(
@@ -149,11 +151,32 @@ class PortfolioHomePageMobile extends StatelessWidget {
                               return gradient.createShader(rect);
                             },
                             child: Text(
-                              ' Solutions.',
+                              ' Enterpreneur ',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: multiplier * 48,
-                                fontWeight: FontWeight.w700,
+                                fontSize: multiplier * 42,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            ' and an ',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: multiplier * 38,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          ShaderMask(
+                            shaderCallback: (rect) {
+                              return gradient.createShader(rect);
+                            },
+                            child: Text(
+                              'Innovator.',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: multiplier * 42,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -191,8 +214,8 @@ class PortfolioHomePageMobile extends StatelessWidget {
                         'I am a seasoned full stack developer with 2+ years of industry experience.',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -202,8 +225,8 @@ class PortfolioHomePageMobile extends StatelessWidget {
                         'Currently working for a NewYork based startup Ventureseed as a Software Developer.\nI had worked as a Junior FullStack and OpenAi developer at Digia. Had done multiple projects for freelance clients. ',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -212,8 +235,8 @@ class PortfolioHomePageMobile extends StatelessWidget {
                         'Always open for new challenges and startup project ideas.',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
                       ),

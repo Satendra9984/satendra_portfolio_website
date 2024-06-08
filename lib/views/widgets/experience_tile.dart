@@ -57,12 +57,14 @@ class _ExperienceTileState extends State<ExperienceTile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.model.role,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey.shade100,
-                          fontSize: 16.0,
+                      Expanded(
+                        child: Text(
+                          widget.model.role,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey.shade100,
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
                       Text(
