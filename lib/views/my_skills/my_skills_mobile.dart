@@ -13,7 +13,6 @@ enum SkillName {
 
 class AboutMeMobileScreen extends StatelessWidget {
   AboutMeMobileScreen({super.key});
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Color?> neumorphicColors = [
     Colors.blue[200], // Soft Blue
@@ -46,7 +45,7 @@ class AboutMeMobileScreen extends StatelessWidget {
   final List<StatusBarData> programmingLanguagesList = [
     StatusBarData(
       title: 'Python',
-      years: 3,
+      years: 2,
     ),
     StatusBarData(
       title: 'C++',
@@ -107,7 +106,7 @@ class AboutMeMobileScreen extends StatelessWidget {
       years: 1,
     ),
     StatusBarData(
-      title: 'Ajile',
+      title: 'Agile',
       years: 1,
     ),
   ];
@@ -141,32 +140,12 @@ class AboutMeMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Colors.grey.shade300,
-      appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
-        title: Text(
-          'theWatcher',
-          style: GoogleFonts.play(
-            // play, playfair, pacifico, incosonata
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-            fontSize: 24.0,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState?.openEndDrawer();
-              },
-              icon: const Icon(Icons.menu))
-        ],
-      ),
-      endDrawer: getSingleDrawer(context),
       body: Container(
-        height: MediaQuery.of(context).size.height,
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         decoration: const BoxDecoration(
           image: DecorationImage(
             alignment: Alignment.bottomRight,
@@ -187,26 +166,18 @@ class AboutMeMobileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Welcome To My World',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey.shade600,
-                    fontSize: 14.0,
-                  ),
-                ),
-                const SizedBox(height: 24),
+                // const SizedBox(height: 24),
                 const Text(
-                  'About Me',
+                  'My Skills',
                   style: TextStyle(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     color: Colors.black,
-                    fontSize: 32.0,
+                    fontSize: 24.0,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '''Hey there! I'm Satendra Pal, a Junior Software Developer with a knack for crafting digital solutions. I love facing technical challenges that no one is solving.
+                  '''While Solving the technical challenges in product development I need to use various tools and technologies and here is the glimpse of that.
                   ''',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
@@ -219,14 +190,26 @@ class AboutMeMobileScreen extends StatelessWidget {
                   runAlignment: WrapAlignment.spaceBetween,
                   alignment: WrapAlignment.spaceBetween,
                   children: [
-                    skillsDetailsSection(SkillName.progLanguages,
-                        'Programming Languages'),
                     skillsDetailsSection(
-                        SkillName.databases, 'Databases'),
+                      size,
+                      SkillName.progLanguages,
+                      'Programming Languages',
+                    ),
                     skillsDetailsSection(
-                        SkillName.frameworks, 'Frameworks'),
+                      size,
+                      SkillName.databases,
+                      'Databases',
+                    ),
                     skillsDetailsSection(
-                        SkillName.tools, 'Developer Tools'),
+                      size,
+                      SkillName.frameworks,
+                      'Frameworks',
+                    ),
+                    skillsDetailsSection(
+                      size,
+                      SkillName.tools,
+                      'Developer Tools',
+                    ),
                   ],
                 ),
               ],
@@ -255,7 +238,7 @@ class AboutMeMobileScreen extends StatelessWidget {
     );
   }
 
-  Widget skillsDetailsSection(SkillName skillName, String title) {
+  Widget skillsDetailsSection(Size size, SkillName skillName, String title) {
     double gap = 2.0;
     int basecolorindex = 0;
 
@@ -275,27 +258,25 @@ class AboutMeMobileScreen extends StatelessWidget {
       basecolorindex = frameworkList.length;
     }
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          stackTech(title),
-          ...List.generate(
-            barlist.length,
-            (index) {
-              return Container(
-                margin: EdgeInsets.symmetric(vertical: gap),
-                child: StatusBarWidget(
-                  statusBarData: barlist[index],
-                  barColor: neumorphicColors[
-                      (basecolorindex++) % neumorphicColors.length]!,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        stackTech(title),
+        ...List.generate(
+          barlist.length,
+          (index) {
+            return Container(
+              margin: EdgeInsets.symmetric(vertical: gap),
+              child: StatusBarWidget(
+                statusBarData: barlist[index],
+                barColor: neumorphicColors[
+                    (basecolorindex++) % neumorphicColors.length]!,
+                width: size.width < 400 ? size.width - 50 : null,
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -362,6 +343,4 @@ class AboutMeMobileScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

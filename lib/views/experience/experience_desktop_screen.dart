@@ -3,9 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:personal_portfolio_website/core/dummy_experience_data.dart';
+import 'package:personal_portfolio_website/core/network/http_utils.dart';
 import 'package:personal_portfolio_website/models/experience_data_model.dart';
 import 'package:personal_portfolio_website/utils/widget_utils.dart';
 import 'package:personal_portfolio_website/views/app_bar_cubit/app_bar_cubit.dart';
+import 'package:rive/rive.dart' hide LinearGradient;
 
 class MyExperienceDesktopScreen extends StatefulWidget {
   const MyExperienceDesktopScreen({super.key});
@@ -16,159 +19,109 @@ class MyExperienceDesktopScreen extends StatefulWidget {
 }
 
 class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
-  int currentExperienceSelected = 0;
+  int currentExperienceSelected = -1;
 
-  final List<ExperienceDataModel> _experiences = [
-    ExperienceDataModel(
-      role: 'Junior Software Engineer',
-      company: 'Digia Softech',
-      startDate: "9/2023",
-      endDate: "2/2024",
-      experience: '''
-🚀 Led the end-to-end development of the Figma UI Format to Digia Code feature, overcoming challenges from requirement analysis to backend and frontend integration, showcasing leadership in feature development from scratch.
+  late final List<ExperienceDataModel> _experiences;
 
-🔧 Reverse-engineered by customizing open-source key Flutter libraries IconSelector, GoogleFonts, showcasing adaptability and resourcefulness for tailored solutions.
+  Future<void> setExperiences() async {
+    if (_experiences.isEmpty) {
+      _experiences.addAll(await HttpUtils.getExperienceList());
+    }
+  }
 
-🛠️ Applied S.O.L.I.D. principles rigorously, ensuring a robust, scalable, and enjoyable codebase, emphasizing a commitment to excellence.
-
-🔄 Mastered Agile processes for innovation, providing a well-rounded perspective on project management and execution in the startup ecosystem.
-
-💻 Flutter Mobile/Web, Typescript, Python, MongoDB, Postman, RESTFul APIs, Algorithm (Figma Parser), HTML/CSS, Figma, Git/Github, SOLID Principles, Flutter Bloc, State Management.
-''',
-    ),
-    ExperienceDataModel(
-      role: 'Software Engineer Intern',
-      company: 'Lokal',
-      startDate: "7/2023",
-      endDate: "9/2024",
-      experience: '''
-⏱️ Unleashed my coding prowess by swiftly comprehending complex codebases in record time!
-
-💡 Demonstrated remarkable efficiency in task delivery, consistently exceeding expectations with rapid and precise execution. 
-
-🚀 Propelled project innovation by ingeniously suggesting and implementing a Dynamic Rendering Algorithm for widgets through the power of recursion, optimizing performance and user experience. 
-
-📈 Recognized for exceptional contributions and promoted to master projects at DIGIA, showcasing leadership and technical prowess.
-
-⏱️ Unleashed my coding prowess by swiftly comprehending complex codebases in record time!
-
-💡 Demonstrated remarkable efficiency in task delivery, consistently exceeding expectations with rapid and precise execution. 
-
-🚀 Propelled project innovation by ingeniously suggesting and implementing a Dynamic Rendering Algorithm for widgets through the power of recursion, optimizing performance and user experience. 
-
-📈 Recognized for exceptional contributions and promoted to master projects at DIGIA, showcasing leadership and technical prowess.
-💻 Skills: Flutter · Postman · Firebase · Dart · HTML5 · Creative Problem Solving
-''',
-    ),
-    ExperienceDataModel(
-      role: 'Freelancer',
-      company: 'ReignSys Technologies',
-      startDate: "1/2023",
-      endDate: "7/2023",
-      experience: '''
-🚀 Crafted a complete mobile app from scratch, diving headfirst into the framework while on the learning curve! 
-
-🎉 Fun-filled and incredibly enriching journey packed with hands-on experiences and valuable lessons. 
-
-📝Nailed down every nuance of customer needs, meticulously documenting requirements to construct a robust system with minimal errors.
-
-🚀 Crafted a complete mobile app from scratch, diving headfirst into the framework while on the learning curve! 
-
-🎉 Fun-filled and incredibly enriching journey packed with hands-on experiences and valuable lessons. 
-
-📝Nailed down every nuance of customer needs, meticulously documenting requirements to construct a robust system with minimal errors.
-
-💻 Skills: Flutter · Google Cloud Platform (GCP) · Node.js · Dart · Dynamic Programming · Creative Problem Solving · API Development · Flask''',
-    ),
-  ];
+  @override
+  void initState() {
+    _experiences = experiences;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            alignment: Alignment.bottomCenter,
-            opacity: 1.0,
-            fit: BoxFit.cover,
-            image: AssetImage('assets/images/Experience_1.jpg'),
-          ),
-        ),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 42.0, right: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'theWatcher',
-                    style: GoogleFonts.play(
-                      // play, playfair, pacifico, incosonata
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 24.0,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  getDrawer(context),
-                ],
-              ),
+      body: Stack(
+        children: [
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: const RiveAnimation.asset(
+              'assets/animations/pull_to_refresh.riv',
             ),
-            Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 44, vertical: 32.0),
+          ),
+          Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 42.0, right: 16.0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Work Experiences',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Colors.black,
-                              fontSize: 32.0,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          // List of projects
-
-                          Expanded(
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: _experiences.length,
-                              itemBuilder: (context, index) {
-                                return experienceTile(
-                                  _experiences[index],
-                                  index,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                    Text(
+                      'theWatcher',
+                      style: GoogleFonts.play(
+                        // play, playfair, pacifico, incosonata
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        fontSize: 24.0,
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 32.0, horizontal: 24),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
+                    getDrawer(context),
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 44, vertical: 32.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Work Experiences',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black,
+                                fontSize: 32.0,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            // List of projects
+
+                            Expanded(
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: _experiences.length,
+                                itemBuilder: (context, index) {
+                                  return experienceTile(
+                                    _experiences[index],
+                                    index,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 32.0, horizontal: 24),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -204,12 +157,12 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
   }) {
     // double offset = 1.0;
     // double blurradius = 1.0;
-    return GestureDetector(
-      onTap: () {
-        context.read<AppBarCubit>().setNewAppBar(index);
-      },
-      child: Container(
-        color: Colors.transparent,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+      child: GestureDetector(
+        onTap: () {
+          context.read<AppBarCubit>().setNewAppBar(index);
+        },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
           child: BackdropFilter(
@@ -219,8 +172,6 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
             ),
             child: Container(
               padding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              margin:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white.withOpacity(0.1)),
@@ -263,13 +214,13 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
     // double blurRadius = 1.0;
     return GestureDetector(
       onTap: () {
-        if (currentExperienceSelected == index) {
+        if (currentExperienceSelected == -1) {
           setState(() {
-            currentExperienceSelected = -1;
+            currentExperienceSelected = index;
           });
         } else {
           setState(() {
-            currentExperienceSelected = index;
+            currentExperienceSelected = -1;
           });
         }
       },

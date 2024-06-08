@@ -33,14 +33,20 @@ class _AnimatedNeumorphicButtonsState extends State<AnimatedNeumorphicButtons> {
     double blurRadius = widget.isDark ? 2.0 : 2.0;
     double spreadRadius = widget.isDark ? 1.0 : 1.0;
     return Listener(
-      onPointerUp: (_) => setState(() {
-        isPressed = false;
-      }),
-      onPointerDown: (_) => setState(() {
-        isPressed = true;
-      }),
+      onPointerUp: (_) {
+        setState(() {
+          isPressed = false;
+        });
+        widget.onPress();
+      },
+      onPointerDown: (_) {
+        setState(() {
+          isPressed = true;
+        });
+        // widget.onPress();
+      },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: const Duration(milliseconds: 100),
         padding: widget.padding,
         margin: widget.margin,
         decoration: BoxDecoration(

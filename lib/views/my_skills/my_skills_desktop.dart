@@ -46,11 +46,11 @@ class AboutMeDesktopScreen extends StatelessWidget {
   final List<StatusBarData> programmingLanguagesList = [
     StatusBarData(
       title: 'Python',
-      years: 3,
+      years: 2,
     ),
     StatusBarData(
       title: 'C++',
-      years: 3,
+      years: 2,
     ),
     StatusBarData(
       title: 'Java',

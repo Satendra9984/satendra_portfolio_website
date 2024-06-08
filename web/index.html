@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -28,28 +29,54 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>personal_portfolio_website</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
+    const serviceWorkerVersion = "{{flutter_service_worker_version}}";
+    
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBiQM8i2gOd-TfUeeKsQQ6KG_u_BJGE8Wk",
+      authDomain: "mypersonalwebsite-d3dec.firebaseapp.com",
+      projectId: "mypersonalwebsite-d3dec",
+      storageBucket: "mypersonalwebsite-d3dec.appspot.com",
+      messagingSenderId: "452957003993",
+      appId: "1:452957003993:web:5cec85985f339574041ec8",
+      measurementId: "G-9LF46ZVYB8"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+  </script>
 </head>
+
 <body>
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
+     FlutterLoader.load({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
             appRunner.runApp();
           });
         }
@@ -57,4 +84,5 @@
     });
   </script>
 </body>
+
 </html>

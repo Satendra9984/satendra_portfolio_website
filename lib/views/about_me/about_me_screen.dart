@@ -1,21 +1,17 @@
-import 'dart:typed_data';
-import 'dart:ui';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_portfolio_website/utils/colors.dart';
 import 'package:personal_portfolio_website/views/app_bar_cubit/app_bar_cubit.dart';
+import 'package:personal_portfolio_website/views/get_in_touch/contacts_sheet.dart';
 import 'package:personal_portfolio_website/views/widgets/app_bar_tile.dart';
 import 'package:personal_portfolio_website/views/widgets/neumorphic_buttons.dart';
-import 'dart:ui' as ui;
+import 'package:rive/rive.dart' hide LinearGradient;
+import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioHomePage extends StatelessWidget {
-  PortfolioHomePage({super.key});
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  const PortfolioHomePage({super.key});
   final LinearGradient gradient = const LinearGradient(
     colors: [AppColours.orange, AppColours.purple],
     begin: Alignment.topLeft,
@@ -30,6 +26,17 @@ class PortfolioHomePage extends StatelessWidget {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  void openUrl(String url) async {
+    final storage = FirebaseStorage.instance;
+    String path = await storage.ref('SatendraPalResume.pdf').getDownloadURL();
+    // debugPrint(path);
+
+    launchUrl(
+      Uri.parse(path),
+      webOnlyWindowName: "_blank",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,66 +53,43 @@ class PortfolioHomePage extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        double width = constraints.maxWidth;
+        // double width = constraints.maxWidth;
 
         return Scaffold(
-          key: _scaffoldKey,
           backgroundColor: Colors.grey.shade300,
-          appBar: width <= 650
-              ? AppBar(
-                  backgroundColor: Colors.grey.shade300,
-                  title: Text(
-                    'theWatcher',
-                    style: GoogleFonts.play(
-                      // play, playfair, pacifico, incosonata
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 24.0,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  actions: [
-                    IconButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState?.openEndDrawer();
-                        },
-                        icon: const Icon(Icons.menu))
-                  ],
-                )
-              : null,
-          endDrawer: width <= 650 ? getSingleDrawer(context) : null,
           body: Column(
             children: [
               // Header
-              if (width > 650)
-                Container(
-                  margin: const EdgeInsets.only(left: 42.0, right: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'theWatcher',
-                        style: GoogleFonts.play(
-                          // play, playfair, pacifico, incosonata
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                          fontSize: 24.0,
-                          fontStyle: FontStyle.italic,
-                        ),
+              Container(
+                margin: const EdgeInsets.only(left: 42.0, right: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'theWatcher',
+                      style: GoogleFonts.play(
+                        // play, playfair, pacifico, incosonata
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        fontSize: 24.0,
+                        fontStyle: FontStyle.italic,
                       ),
-                      getDrawer(context),
-                    ],
-                  ),
+                    ),
+                    getDrawer(context),
+                  ],
                 ),
+              ),
 
               // Body
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Container(
-                    height: MediaQuery.of(context).size.height,
+                    // height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 16),
+                      vertical: 16,
+                      horizontal: 16,
+                    ),
                     alignment: Alignment.center,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,24 +100,6 @@ class PortfolioHomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // <------------------  Intro Part ---------------------->
-
-                              if (width <= 950)
-                                ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.circular(multiplier * 100),
-                                  child: CircleAvatar(
-                                    radius: 120,
-                                    backgroundColor: Colors.transparent,
-                                    child: SvgPicture.asset(
-                                      'assets/images/personality_1.svg',
-                                      semanticsLabel: 'Personality',
-                                      fit: BoxFit.fitHeight,
-                                    ),
-                                  ),
-                                ),
-                              SizedBox(height: multiplier * 40),
-
                               Wrap(
                                 alignment: WrapAlignment.center,
                                 children: [
@@ -204,31 +170,20 @@ class PortfolioHomePage extends StatelessWidget {
                               ),
 
                               SizedBox(height: multiplier * 40),
-
-                              Text(
-                                '''I am a seasoned full-stack software engineer with over8 years of professional experience, specializing in backend development.My expertise lies in crafting robust and scalable SaaS-basedarchitectures on the Amazon AWS platform.''',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: width <= 950 ? 14 : 16.0,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: multiplier * 56),
-
-                              // <------------------- About --------------------------- >
-                              Wrap(
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                runAlignment: WrapAlignment.spaceBetween,
+                              Column(
+                                // runAlignment: WrapAlignment.spaceBetween,
                                 children: [
                                   AnimatedNeumorphicButtons(
-                                    onPress: () {},
+                                    onPress: () {
+                                      openUrl(
+                                          'gs://mypersonalwebsite-d3dec.appspot.com/SatendraPalResume.pdf');
+                                    },
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 8.0),
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 8.0),
                                     child: const Text(
-                                      'Get In Touch',
+                                      'Download CV',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
@@ -236,38 +191,64 @@ class PortfolioHomePage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  AnimatedNeumorphicButtons(
-                                    onPress: () {},
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 8.0),
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 8.0),
-                                    isDark: true,
-                                    child: const Text(
-                                      'Download CV',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
+                                  const SizedBox(height: 8.0),
+                                  GetInTouchContactsSheet(),
+                                  const SizedBox(height: 8.0),
                                 ],
                               ),
+                              SizedBox(height: multiplier * 40),
+
+                              const Text(
+                                'I am a seasoned full stack developer with 2+ years of industry experience.',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 4),
+
+                              const Text(
+                                'Currently working for a NewYork based startup Ventureseed as a Software Developer.\nI had worked as a Junior FullStack and OpenAi developer at Digia. Had done multiple projects for freelance clients. ',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Always open for new challenges and startup project ideas.',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 4),
+                              SizedBox(height: multiplier * 56),
+
+                              // <------------------- About --------------------------- >
                             ],
                           ),
                         ),
-                        if (width > 950)
-                          Expanded(
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: SvgPicture.asset(
-                                'assets/images/personality_1.svg',
-                                semanticsLabel: 'Personality',
-                                fit: BoxFit.fitHeight,
-                              ),
+                        Expanded(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height - 2 * 48,
+                            // child: SvgPicture.asset(
+                            //   'assets/images/personality_1.svg',
+                            //   semanticsLabel: 'Personality',
+                            //   fit: BoxFit.fitHeight,
+                            // ),
+
+                            child: RiveAnimation.asset(
+                              'assets/animations/college_student.riv',
                             ),
                           ),
+                        ),
                       ],
                     ),
                   ),
@@ -307,72 +288,4 @@ class PortfolioHomePage extends StatelessWidget {
       },
     );
   }
-
-  Widget getSingleDrawer(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8.0),
-        width: 170.0,
-        height: 180,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16.0),
-            bottomLeft: Radius.circular(16.0),
-          ),
-        ),
-        child: BlocBuilder<AppBarCubit, AppBarState>(
-          builder: (context, state) {
-            var appbarcubit = context.read<AppBarCubit>();
-            List<AppBarData> list = appbarcubit.appBarList;
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                list.length,
-                (index) {
-                  bool selected = index == state.currentSelectedAppBar;
-                  return Container(
-                    color: selected
-                        ? Colors.grey.shade900
-                        : Colors.grey.shade300,
-                    child: ListTile(
-                      selected: selected,
-                      onTap: () {
-                        appbarcubit.setNewAppBar(index);
-                      },
-                      dense: true,
-                      selectedTileColor: Colors.grey.shade900,
-                      leading: Icon(
-                        list[index].iconData,
-                        color: selected
-                            ? Colors.grey.shade300
-                            : Colors.grey.shade900,
-                        size: 18.0,
-                      ),
-                      title: Text(
-                        list[index].title,
-                        style: GoogleFonts.play(
-                          // play, playfair, pacifico, incosonata
-                          fontWeight: FontWeight.w600,
-                          color: selected
-                              ? Colors.grey.shade300
-                              : Colors.grey.shade900,
-                          fontSize: 16.0,
-                          // fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-
-
 }

@@ -3,6 +3,8 @@ class ProjectDataModel {
   final String descriptions;
   final String projectUrl;
   final String projectReadmeUrl;
+  final String projectImageUrl;
+
 
 
   ProjectDataModel({
@@ -10,5 +12,6 @@ class ProjectDataModel {
     required this.descriptions,
     required this.projectUrl,
     required this.projectReadmeUrl,
+    required this.projectImageUrl,
   });
 }

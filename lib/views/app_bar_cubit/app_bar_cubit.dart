@@ -18,11 +18,6 @@ class AppBarCubit extends Cubit<AppBarState> {
 
   AppBarCubit() : super(const AppBarState(currentSelectedAppBar: 0)) {
     _pageController = PageController();
-    // _pageController.addListener(() {
-    //   setState(() {
-    //     currentPage = _pageController.page!.toInt();
-    //   });
-    // });
   }
 
   void setNewAppBar(int newselected) {

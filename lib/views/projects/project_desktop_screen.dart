@@ -10,7 +10,7 @@ import 'package:personal_portfolio_website/views/widgets/app_bar_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyProjectsDesktopScreen extends StatefulWidget {
-  MyProjectsDesktopScreen({super.key});
+  const MyProjectsDesktopScreen({super.key});
 
   @override
   State<MyProjectsDesktopScreen> createState() =>
@@ -28,6 +28,7 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
           'https://github.com/Satendra9984/veridox/',
       projectReadmeUrl:
           'https://github.com/Satendra9984/veridox/blob/master/README.md',
+      projectImageUrl: '',    
     ),
     ProjectDataModel(
       title: 'FigmaJson, HTML/CSS to Digia Format',
@@ -37,6 +38,8 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
           'https://github.com/Satendra9984/figma_to_digiaJson/',
       projectReadmeUrl:
           'https://github.com/Satendra9984/figma_to_digiaJson/blob/main/README.md',
+      projectImageUrl: '',    
+
     ),
     ProjectDataModel(
       title: 'FastApi Todo Full Stack ',
@@ -46,6 +49,8 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
           'https://github.com/Satendra9984/fastapi_todo_backend/',
       projectReadmeUrl:
           'https://github.com/Satendra9984/fastapi_todo_backend/blob/main/README.md',
+      projectImageUrl: '',    
+
     ),
     ProjectDataModel(
       title: 'Kanak-Metal Marketplace',
@@ -55,6 +60,8 @@ class _MyProjectsDesktopScreenState extends State<MyProjectsDesktopScreen> {
           'https://github.com/Satendra9984/Kanak_Marketplace_App/',
       projectReadmeUrl:
           'https://github.com/Satendra9984/Kanak_Marketplace_App/blob/main/README.md',
+      projectImageUrl: '',    
+
     ),
     // ProjectDataModel(
     //   title: '',
