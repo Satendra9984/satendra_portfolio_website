@@ -32,18 +32,18 @@ class DesktopHomeScreen extends StatelessWidget {
                 },
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  const ResponsiveScreenWrapperWidget(
-                      mobileScreen: MyExperienceMobileScreen(),
-                      desktopScreen: MyExperienceDesktopScreen()),
+                  // const ResponsiveScreenWrapperWidget(
+                  //     mobileScreen: MyExperienceMobileScreen(),
+                  //     desktopScreen: MyExperienceDesktopScreen()),
                   const ResponsiveScreenWrapperWidget(
                       mobileScreen: PortfolioHomePageMobile(),
                       desktopScreen: PortfolioHomePage()),
                   ResponsiveScreenWrapperWidget(
                       mobileScreen: AboutMeMobileScreen(),
                       desktopScreen: AboutMeDesktopScreen()),
-                  // const ResponsiveScreenWrapperWidget(
-                  //     mobileScreen: MyExperienceMobileScreen(),
-                  //     desktopScreen: MyExperienceDesktopScreen()),
+                  const ResponsiveScreenWrapperWidget(
+                      mobileScreen: MyExperienceMobileScreen(),
+                      desktopScreen: MyExperienceDesktopScreen()),
                   ResponsiveScreenWrapperWidget(
                       mobileScreen: MyProjectsMobileScreen(),
                       desktopScreen: MyProjectsDesktopScreen()),

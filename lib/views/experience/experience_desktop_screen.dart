@@ -189,14 +189,14 @@ class _MyExperienceDesktopScreenState extends State<MyExperienceDesktopScreen> {
                 children: [
                   Icon(
                     iconData,
-                    color: isCurrent ? Colors.white : Colors.white,
+                    color: isCurrent ? Colors.black : Colors.white,
                     size: 16.0,
                   ),
                   Text(
                     title,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: isCurrent ? Colors.white : Colors.white,
+                      color: isCurrent ? Colors.black : Colors.white,
                       fontSize: 14.0,
                     ),
                   ),

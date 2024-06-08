@@ -95,158 +95,196 @@ class PortfolioHomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        // Expanded(
+                        //   child: SizedBox(
+                        //     height: size.height - 3 * 48,
+                        //     width: size.width / 2,
+                        //     child: const RiveAnimation.asset(
+                        //       //  'assets/animations/pull_to_refresh_.riv',
+                        //       'assets/animations/bubble_demo.riv',
+                        //       //  'assets/animations/college_student.riv',
+                        //       fit: BoxFit.cover,
+                              
+                        //     ),
+                        //   ),
+                        // ),
+                        
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Wrap(
-                                alignment: WrapAlignment.center,
-                                children: [
-                                  Text(
-                                    ' I am',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: multiplier * 52,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  ShaderMask(
-                                    shaderCallback: (rect) {
-                                      return gradient.createShader(rect);
-                                    },
-                                    child: Text(
-                                      ' Satendra Pal',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: multiplier * 48,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    ' an',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: multiplier * 52,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  ShaderMask(
-                                    shaderCallback: (rect) {
-                                      return gradient.createShader(rect);
-                                    },
-                                    child: Text(
-                                      ' Engineer',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: multiplier * 48,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    ' and I Build',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: multiplier * 52,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  ShaderMask(
-                                    shaderCallback: (rect) {
-                                      return gradient.createShader(rect);
-                                    },
-                                    child: Text(
-                                      ' Solutions.',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: multiplier * 48,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: multiplier * 40),
-                              Column(
-                                // runAlignment: WrapAlignment.spaceBetween,
-                                children: [
-                                  AnimatedNeumorphicButtons(
-                                    onPress: () {
-                                      openUrl(
-                                          'gs://mypersonalwebsite-d3dec.appspot.com/SatendraPalResume.pdf');
-                                    },
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 8.0),
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 8.0),
-                                    child: const Text(
-                                      'Download CV',
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Wrap(
+                                  alignment: WrapAlignment.center,
+                                  runAlignment: WrapAlignment.center,
+                                  children: [
+                                    Text(
+                                      'I am',
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: multiplier * 52,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                     ),
+                                    ShaderMask(
+                                      shaderCallback: (rect) {
+                                        return gradient.createShader(rect);
+                                      },
+                                      child: Text(
+                                        ' Satendra Pal',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: multiplier * 48,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      ' a ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: multiplier * 52,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (rect) {
+                                        return gradient.createShader(rect);
+                                      },
+                                      child: Text(
+                                        'Cross-Platform Engineer',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: multiplier * 48,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      ' , ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: multiplier * 52,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (rect) {
+                                        return gradient.createShader(rect);
+                                      },
+                                      child: Text(
+                                        ' Enterpreneur ',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: multiplier * 48,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      ' and an ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: multiplier * 52,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (rect) {
+                                        return gradient.createShader(rect);
+                                      },
+                                      child: Text(
+                                        'Innovator.',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: multiplier * 48,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                            
+                                SizedBox(height: multiplier * 40),
+                                Column(
+                                  // runAlignment: WrapAlignment.spaceBetween,
+                                  children: [
+                                    AnimatedNeumorphicButtons(
+                                      onPress: () {
+                                        openUrl(
+                                            'gs://mypersonalwebsite-d3dec.appspot.com/SatendraPalResume.pdf');
+                                      },
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0, vertical: 8.0),
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 16.0, vertical: 8.0),
+                                      child: const Text(
+                                        'Download CV',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8.0),
+                                    GetInTouchContactsSheet(),
+                                    const SizedBox(height: 8.0),
+                                  ],
+                                ),
+                                SizedBox(height: multiplier * 40),
+                            
+                                const Text(
+                                  'I am a seasoned full stack developer with 2+ years of industry experience.',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  const SizedBox(height: 8.0),
-                                  GetInTouchContactsSheet(),
-                                  const SizedBox(height: 8.0),
-                                ],
-                              ),
-                              SizedBox(height: multiplier * 40),
-
-                              const Text(
-                                'I am a seasoned full stack developer with 2+ years of industry experience.',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w400,
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 4),
-
-                              const Text(
-                                'Currently working for a NewYork based startup Ventureseed as a Software Developer.\nI had worked as a Junior FullStack and OpenAi developer at Digia. Had done multiple projects for freelance clients. ',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w400,
+                                const SizedBox(height: 4),
+                            
+                                const Text(
+                                  'Currently working for a NewYork based startup Ventureseed as a Software Developer.\nI had worked as a Junior FullStack and OpenAi developer at Digia. Had done multiple projects for freelance clients. ',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Always open for new challenges and startup project ideas.',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w400,
+                                const SizedBox(height: 4),
+                                const Text(
+                                  'Always open for new challenges and startup project ideas.',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 4),
-                              SizedBox(height: multiplier * 56),
-
-                              // <------------------- About --------------------------- >
-                            ],
+                                const SizedBox(height: 4),
+                                SizedBox(height: multiplier * 56),
+                            
+                                // <------------------- About --------------------------- >
+                              ],
+                            ),
                           ),
                         ),
+                        
                         Expanded(
                           child: SizedBox(
-                            height: MediaQuery.of(context).size.height - 2 * 48,
-                            // child: SvgPicture.asset(
-                            //   'assets/images/personality_1.svg',
-                            //   semanticsLabel: 'Personality',
-                            //   fit: BoxFit.fitHeight,
-                            // ),
-
+                            height: size.height - 3 * 48,
+                            width: size.width / 2,
                             child: const RiveAnimation.asset(
-                              // 'assets/animations/college_student.riv',
-                             ' assets/animations/pull_to_refresh.riv',
+                              //  'assets/animations/pull_to_refresh_.riv',
+                              'assets/animations/bubble_demo.riv',
+                              //  'assets/animations/college_student.riv',
+                              fit: BoxFit.cover,
+                              
                             ),
                           ),
                         ),
